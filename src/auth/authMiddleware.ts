@@ -10,21 +10,38 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     }
     else
     {
+        if(!req.body)
+        {
+            req.body={};
+        }
         try
         {
-            const username = jwt.verify(token, "DecoreEvent").username;
+            const username = jwt.verify(token, "DecoreEvent").username; //Hardcoded for now... show use .env
             if(players.has(username))
             {
+                req.body.isAdmin = false;
                 next();
             }
             else
             {
-                return res.status(401).json({error: "Invalid Token. Sign In again"});
+                    return res.status(401).json({error: "Username Not Found"});
             }
         }
-        catch
+        catch(e)
         {
-            return res.status(401).json({error: "Invalid Token. Sign In again"});
+            try
+            {
+                const admin = jwt.verify(token, "TheGoat").username;
+                if(admin === "adminDecore")
+                {
+                    req.body.isAdmin = true;
+                    next();
+                }
+            }
+            catch(e)
+            {
+                return res.status(401).json({error: "Invalid Token. Sign In again : " + e});
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ app.use(authMiddleware);
 
 app.get("/join/:roomid", (req, res) => {
     // Handle joining a room using websocket
-    return res.status(200).json({message: "Joined room successfully."});
+    return res.status(200).json({message: "Joined room successfully.", admin: req.body.isAdmin});
 })
 
 app.listen(3000);
