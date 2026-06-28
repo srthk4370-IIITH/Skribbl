@@ -47,4 +47,8 @@ export class Room
             return nextDrawer;
         }
     } 
+    public givePoints()
+    {
+        //Need to implement the Answered Already queue
+    }
 }

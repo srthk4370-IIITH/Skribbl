@@ -6,11 +6,11 @@ export class Player
     public isDrawer : boolean;
     public websocket : WebSocket;
     public roomid : string;
-    constructor(username : string, score : number, isDrawer : boolean, websocket : WebSocket, roomid : string)
+    constructor(username : string, score : number, websocket : WebSocket, roomid : string)
     {
         this.username = username;
         this.score = score;
-        this.isDrawer = isDrawer;
+        this.isDrawer = false;
         this.websocket = websocket;
         this.roomid = roomid;
     }
