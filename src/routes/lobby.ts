@@ -42,6 +42,20 @@ export const createRoom = (req: Request, res: Response) : any => {
     }
 }
 
+export const joinRoom = (req: Request, res: Response) : any => 
+{
+    const roomId = req.params.roomid;
+    if (typeof roomId !== "string") {
+        return res.status(400).json({error: "Invalid room id."});
+    }
+    if(!RoomController.rooms.has(roomId))
+    {
+        return res.status(404).json({error: "Room not found."});
+    }
+
+    return res.status(200).json({message: "Joining room...", roomid: roomId});
+}
+
 
 // app.get("/create", createRoom);
 
